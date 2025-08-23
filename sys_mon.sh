@@ -3,11 +3,16 @@
 	#check for mem usage
 	#check for disk usage
 	#check for cpu usage
+
+#function for prompting user with option
 option_check() {
 echo "Type system service you want to check:"
 echo "Services are; Memory and Disk"
 read service
+
+#makes sure that even when user type with capital letter no error appears
 c_service=$(echo "$service" | tr '[:upper:]' '[:lower:]')
+
 if [[ "$c_service" == "memory" ]]; then
 	memory_check
 elif [[ "$c_service" == "disk" ]]; then
@@ -41,5 +46,5 @@ else
 	echo "Disk usage is good at the moment now at $disk%"
 fi
 }
-
+#calling the check function
 option_check
