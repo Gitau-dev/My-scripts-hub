@@ -21,13 +21,14 @@ else
 	echo "Please type either of this services: memory or disk"
 fi
 }
+
+
 #....for memory
 memory_check() {
 threshold_m=70
 mem=$(free -m | awk 'NR == 2 {print $3} ')
 mem1=$(free -m | awk 'NR == 2 {print $2}')
 memo=$(echo "scale=2; $mem/$mem1*100" | bc -l )
-
 
 if [[ "$memo" -gt "$threshold_m" ]]; then
 	echo "Warning: Threshold is met. Now at $memo%"
@@ -36,15 +37,18 @@ else
 fi
 }
 
+
 #....for disk
 disk_check() {
 threshold_d=70
 disk=$(df -h | awk 'NR == 3 {print $5}' | sed 's/%//')
+
 if [[ "$disk" -gt "$threshold_d" ]]; then 
 	echo "Disk usage is above threshold. Now at $disk%"
 else
 	echo "Disk usage is good at the moment now at $disk%"
 fi
 }
+
 #calling the check function
 option_check
